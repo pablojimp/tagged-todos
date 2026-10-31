@@ -15,9 +15,31 @@
     "commands": [
       {
         "command": "tagged-todos.helloWorld",
-        "title": "Hello World"
+        "title": "Saludo de Pablo"
+      },
+      {
+        "command": "tagged-todos.hora",
+        "title": "Obten hora actual"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "todo-tags",
+          "title": "Tagged TODOs",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "todo-tags":[
+        {
+          "id": "todo-tags.list",
+          "name": "TODOs by Tag",
+          "icon": "media/icon.svg"
+        }
+      ]
+    }
   },
   "scripts": {
     "lint": "eslint .",
