@@ -1,65 +1,86 @@
-# tagged-todos README
+# Tagged TODOs
 
-This is the README for your extension "tagged-todos". After writing up a brief description, we recommend including the following sections.
+> Write `TODO[tag]: text` in your code and see every TODO grouped by tag in its own sidebar view.
+
+![Status](https://img.shields.io/badge/status-work%20in%20progress-orange)
+![VS Code](https://img.shields.io/badge/VS%20Code-extension-007ACC)
+![Language](https://img.shields.io/badge/built%20with-JavaScript-F7DF1E)
+
+Plain `TODO` comments get lost as a project grows. **Tagged TODOs** adds one small convention, a tag between brackets, and turns your scattered comments into an organized tree you can browse and jump through.
+
+## How it works
+
+Write your comments with a tag inside the brackets:
+
+```js
+// TODO[backend]: validate the token on login
+// TODO[ui]: center the save button
+// TODO[backend]: add pagination
+```
+
+Open the **Tagged TODOs** tab in the Activity Bar and you get them grouped by tag:
+
+```
+TODOs by Tag
+├─ backend (2)
+│   ├─ validate the token on login      AuthService.java:42
+│   └─ add pagination                   UserController.java:18
+└─ ui (1)
+    └─ center the save button           styles.css:7
+```
+
+Click any item to jump straight to its line.
+
+<!-- Add a screenshot or short GIF here once the tree view works:
+![Tagged TODOs in action](images/demo.gif)
+-->
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- Dedicated view in the Activity Bar
+- TODOs grouped by the text inside `[ ]`, with a counter per group
+- One click to open the file at the exact line
+- Automatic refresh when you save a file
 
-For example if there is an image subfolder under your extension project workspace:
+> Some of these are still being built. See the [roadmap](#roadmap) for the current state.
 
-\!\[feature X\]\(images/feature-x.png\)
+## Comment format
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+| Comment | Result |
+|---|---|
+| `// TODO[backend]: fix login` | Tag `backend`, text "fix login" |
+| `# TODO[docs]: write README` | Tag `docs`, text "write README" |
+| `// TODO fix login` | Ignored (no tag) |
 
-## Requirements
+## Roadmap
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- [x] Project setup and first command running
+- [x] Activity Bar container and view
+- [ ] Detect `TODO[tag]` comments (regex)
+- [ ] Scan the workspace files
+- [ ] Group by tag
+- [ ] Render the tree view
+- [ ] Click to jump to the line + auto refresh
+- [ ] Settings: file types and folders to ignore
+- [ ] Highlight tagged TODOs in the editor
+- [ ] Publish on the Marketplace
 
-## Extension Settings
+## Development
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Requirements: [Node.js](https://nodejs.org) (LTS) and [VS Code](https://code.visualstudio.com).
 
-For example:
+```bash
+git clone https://github.com/<your-user>/tagged-todos.git
+cd tagged-todos
+npm install
+```
 
-This extension contributes the following settings:
+Open the folder in VS Code and press **F5**. A new *Extension Development Host* window opens with the extension loaded. After changing the code, run **Developer: Reload Window** in that window to see the changes.
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+## Credits
 
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Icons by [Uicons](https://www.flaticon.com/uicons) from [Flaticon](https://www.flaticon.com).
 
 ---
 
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Made by Pablo. Feedback and ideas are welcome. Enjoy!
