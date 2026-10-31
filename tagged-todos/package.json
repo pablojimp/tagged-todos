@@ -1,0 +1,40 @@
+{
+  "name": "tagged-todos",
+  "displayName": "Tagged TODOs",
+  "description": "Groups TODO[tag] comments by tag in a sidebar tree, so you can jump to each one.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.144.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "tagged-todos.helloWorld",
+        "title": "Hello World"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "@types/vscode": "^1.144.0",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0",
+    "eslint": "^10.5.0",
+    "globals": "^17.13.0"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  }
+}
