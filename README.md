@@ -56,7 +56,7 @@ Click any item to jump straight to its line.
 
 - [x] Project setup and first command running
 - [x] Activity Bar container and view
-- [ ] Detect `TODO[tag]` comments (regex)
+- [x] Detect `TODO[tag]` comments (regex)
 - [ ] Scan the workspace files
 - [ ] Group by tag
 - [ ] Render the tree view
