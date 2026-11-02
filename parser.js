@@ -1,29 +1,29 @@
-// Grupo 1 = etiqueta (undefined si no hay corchetes, "" si están vacíos)
-// Grupo 2 = texto
+// Group 1 = tag (undefined if there are no brackets, "" if they are empty)
+// Group 2 = text
 const pattern = /\bTODO\b\s*(?:\[([^\]]*)\])?:?\s*(.*)$/i;
 
 /**
- * Analiza una línea y extrae la etiqueta y el texto de su TODO.
- * @param {string} texto Línea de código a analizar.
- * @returns {{ tag: string, text: string } | null} La etiqueta en mayúsculas y el texto, o null si la línea no tiene TODO.
+ * Parses a line and extracts the tag and the text of its TODO.
+ * @param {string} line Line of code to parse.
+ * @returns {{ tag: string, text: string } | null} The uppercase tag and the text, or null if the line has no TODO.
  */
-function textAnalyzer(texto) {
-    const result = pattern.exec(texto);
+function textAnalyzer(line) {
+    const result = pattern.exec(line);
     if (result === null) {
         return null;
     }
 
-    let tituloFormateado = (result[1] ?? "").trim().toUpperCase();
-    if (tituloFormateado === "") {
-        tituloFormateado = "UNTAGGED";
+    let formattedTag = (result[1] ?? "").trim().toUpperCase();
+    if (formattedTag === "") {
+        formattedTag = "UNTAGGED";
     }
 
-    let descripcionFormateada = result[2].trim();
-    if (descripcionFormateada === "") {
-        descripcionFormateada = "WITHOUT DESCRIPTION";
+    let formattedText = result[2].trim();
+    if (formattedText === "") {
+        formattedText = "WITHOUT DESCRIPTION";
     }
 
-    return { tag: tituloFormateado, text: descripcionFormateada };
+    return { tag: formattedTag, text: formattedText };
 }
 
 module.exports = {
