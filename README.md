@@ -58,7 +58,7 @@ Click any item to jump straight to its line.
 - [x] Activity Bar container and view
 - [x] Detect `TODO[tag]` comments (regex)
 - [x] Scan the workspace files
-- [ ] Group by tag
+- [x] Group by tag
 - [ ] Render the tree view
 - [ ] Click to jump to the line + auto refresh
 - [ ] Settings: file types and folders to ignore
