@@ -15,6 +15,8 @@ async function activate(context) {
 	console.log('Congratulations, your extension "tagged-todos" is now active!');
 	const currentTodos = await loadTodos()
 	console.log(currentTodos)
+	const vistaArbol = mapaArbol(currentTodos)
+	console.log(vistaArbol)
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
@@ -48,6 +50,30 @@ async function loadTodos() {
 		}
 	}
 	return TODOTAGS
+}
+
+/**
+ * @param {{
+ *   TODO: { tag: string, text: string },
+ *   FILE: vscode.Uri,
+ *   LINE: number
+ * }[]} lista
+ */
+function mapaArbol(lista) {
+
+	const mapaDevolver = new Map();
+	for (let i = 0; i < lista.length; i++) {
+		if(mapaDevolver.get(lista[i].TODO.tag)){
+			
+			mapaDevolver.get(lista[i].TODO.tag).push(lista[i])
+		}
+		else{
+			let arrayGuardar = []
+			arrayGuardar.push(lista[i])
+			mapaDevolver.set(lista[i].TODO.tag , arrayGuardar)
+		}
+	}
+	return mapaDevolver
 }
 
 async function loadWorkspace() {
