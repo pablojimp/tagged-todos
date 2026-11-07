@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 const { textAnalyzer } = require('./parser')
+const {MapTree} = require('./treeProvider')
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 
@@ -14,9 +15,9 @@ async function activate(context) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "tagged-todos" is now active!');
 	const currentTodos = await loadTodos()
-	console.log(currentTodos)
 	const vistaArbol = mapaArbol(currentTodos)
-	console.log(vistaArbol)
+	const arbol = new MapTree(vistaArbol)
+	const arbolDisposable = vscode.window.registerTreeDataProvider("todo-tags.list", arbol)
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
@@ -26,7 +27,7 @@ async function activate(context) {
 		vscode.window.showInformationMessage('Hello World from Tagged TODOs!');
 	});
 
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(disposable,arbolDisposable);
 }
 async function loadTodos() {
 	const files = await loadWorkspace()
@@ -65,7 +66,7 @@ function mapaArbol(lista) {
 	for (let i = 0; i < lista.length; i++) {
 		if(mapaDevolver.get(lista[i].TODO.tag)){
 			
-			mapaDevolver.get(lista[i].TODO.tag).push(lista[i])
+			mapaDevolver.get(lista[i].TODO.tag).push(lista[i])	
 		}
 		else{
 			let arrayGuardar = []
