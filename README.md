@@ -59,7 +59,7 @@ Click any item to jump straight to its line.
 - [x] Detect `TODO[tag]` comments (regex)
 - [x] Scan the workspace files
 - [x] Group by tag
-- [ ] Render the tree view
+- [x] Render the tree view
 - [ ] Click to jump to the line + auto refresh
 - [ ] Settings: file types and folders to ignore
 - [ ] Highlight tagged TODOs in the editor
