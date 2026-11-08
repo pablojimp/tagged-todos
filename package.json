@@ -12,16 +12,7 @@
   "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "tagged-todos.helloWorld",
-        "title": "Saludo de Pablo"
-      },
-      {
-        "command": "tagged-todos.hora",
-        "title": "Obten hora actual"
-      }
-    ],
+    "commands": [],
     "viewsContainers": {
       "activitybar": [
         {
