@@ -18,11 +18,19 @@ class MapTree {
    */
 
   getTreeItem(element) {
+    let treeItem
     if (typeof element === "string") {
-      return new vscode.TreeItem(element,vscode.TreeItemCollapsibleState.Collapsed)
+      treeItem = new vscode.TreeItem(element, vscode.TreeItemCollapsibleState.Collapsed)
     } else {
-      return new vscode.TreeItem(element.TODO.text, vscode.TreeItemCollapsibleState.None)
+      treeItem = new vscode.TreeItem(element.TODO.text, vscode.TreeItemCollapsibleState.None)
+      treeItem.command = {
+        title: "Open TODO",
+        command: "vscode.open",
+        arguments: [ element.FILE, { selection: new vscode.Range(element.LINE,0,element.LINE,0) }]
+      }
     }
+
+    return treeItem
   }
 
   /**
@@ -41,10 +49,10 @@ class MapTree {
     return clavesDevolver
   }
 
-  
+
 }
 module.exports = {
-    MapTree
+  MapTree
 }
 
 
