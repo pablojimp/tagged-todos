@@ -60,7 +60,7 @@ Click any item to jump straight to its line.
 - [x] Scan the workspace files
 - [x] Group by tag
 - [x] Render the tree view
-- [ ] Click to jump to the line + auto refresh
+- [x] Click to jump to the line + auto refresh
 - [ ] Settings: file types and folders to ignore
 - [ ] Highlight tagged TODOs in the editor
 - [ ] Publish on the Marketplace
