@@ -15,16 +15,16 @@ async function activate(context) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "tagged-todos" is now active!');
 	let currentTodos = await loadTodos()
-	let vistaArbol = mapaArbol(currentTodos)
-	let arbol = new MapTree(vistaArbol)
-	let arbolDisposable = vscode.window.registerTreeDataProvider("todo-tags.list", arbol)
+	let todosByTag = groupByTag(currentTodos)
+	let todoTree = new MapTree(todosByTag)
+	let treeDisposable = vscode.window.registerTreeDataProvider("todo-tags.list", todoTree)
 
-	const escucha = vscode.workspace.onDidSaveTextDocument(async (documento) => {
+	const saveListener = vscode.workspace.onDidSaveTextDocument(async () => {
 		currentTodos = await loadTodos()
-		vistaArbol = mapaArbol(currentTodos)
-		arbol.refrescar(vistaArbol)
+		todosByTag = groupByTag(currentTodos)
+		todoTree.refresh(todosByTag)
 	})
-	context.subscriptions.push(arbolDisposable, escucha);
+	context.subscriptions.push(treeDisposable, saveListener);
 }
 async function loadTodos() {
 	const files = await loadWorkspace()
@@ -55,23 +55,23 @@ async function loadTodos() {
  *   TODO: { tag: string, text: string },
  *   FILE: vscode.Uri,
  *   LINE: number
- * }[]} lista
+ * }[]} todos
  */
-function mapaArbol(lista) {
+function groupByTag(todos) {
 
-	const mapaDevolver = new Map();
-	for (let i = 0; i < lista.length; i++) {
-		if (mapaDevolver.get(lista[i].TODO.tag)) {
+	const groups = new Map();
+	for (let i = 0; i < todos.length; i++) {
+		if (groups.get(todos[i].TODO.tag)) {
 
-			mapaDevolver.get(lista[i].TODO.tag).push(lista[i])
+			groups.get(todos[i].TODO.tag).push(todos[i])
 		}
 		else {
-			let arrayGuardar = []
-			arrayGuardar.push(lista[i])
-			mapaDevolver.set(lista[i].TODO.tag, arrayGuardar)
+			let newGroup = []
+			newGroup.push(todos[i])
+			groups.set(todos[i].TODO.tag, newGroup)
 		}
 	}
-	return mapaDevolver
+	return groups
 }
 
 async function loadWorkspace() {

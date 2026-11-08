@@ -6,14 +6,14 @@ class MapTree {
    *   TODO: { tag: string, text: string },
    *   FILE: vscode.Uri,
    *   LINE: number
-   * }[]>} mapa
+   * }[]>} todosByTag
    */
 
-  constructor(mapa) {
-    this.mapa = mapa
+  constructor(todosByTag) {
+    this.todosByTag = todosByTag
     /** @type {vscode.EventEmitter<void>} */
-    this.emisor = new vscode.EventEmitter()
-    this.onDidChangeTreeData = this.emisor.event
+    this.changeEmitter = new vscode.EventEmitter()
+    this.onDidChangeTreeData = this.changeEmitter.event
   }
 
 
@@ -41,27 +41,26 @@ class MapTree {
    *   TODO: { tag: string, text: string },
    *   FILE: vscode.Uri,
    *   LINE: number
-   * }[]>} mapaNuevo
-   * 
+   * }[]>} newTodosByTag
    */
-  refrescar(mapaNuevo) {
-    this.mapa = mapaNuevo
-    this.emisor.fire()
+  refresh(newTodosByTag) {
+    this.todosByTag = newTodosByTag
+    this.changeEmitter.fire()
   }
   /**
    * @param {*} element 
    */
 
   getChildren(element) {
-    let clavesDevolver = []
+    let children = []
     if (element === undefined) {
-      for (const tag of this.mapa.keys()) {
-        clavesDevolver.push(tag)
+      for (const tag of this.todosByTag.keys()) {
+        children.push(tag)
       }
     } else {
-      clavesDevolver = this.mapa.get(element) ?? []
+      children = this.todosByTag.get(element) ?? []
     }
-    return clavesDevolver
+    return children
   }
 
 
