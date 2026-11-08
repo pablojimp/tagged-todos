@@ -22,10 +22,10 @@ Open the **Tagged TODOs** tab in the Activity Bar and you get them grouped by ta
 
 ```
 TODOs by Tag
-├─ backend (2)
+├─ BACKEND (2)
 │   ├─ validate the token on login      AuthService.java:42
 │   └─ add pagination                   UserController.java:18
-└─ ui (1)
+└─ UI (1)
     └─ center the save button           styles.css:7
 ```
 
@@ -42,15 +42,17 @@ Click any item to jump straight to its line.
 - One click to open the file at the exact line
 - Automatic refresh when you save a file
 
-> Some of these are still being built. See the [roadmap](#roadmap) for the current state.
-
 ## Comment format
 
 | Comment | Result |
 |---|---|
-| `// TODO[backend]: fix login` | Tag `backend`, text "fix login" |
-| `# TODO[docs]: write README` | Tag `docs`, text "write README" |
-| `// TODO fix login` | Ignored (no tag) |
+| `// TODO[backend]: fix login` | Tag `BACKEND`, text "fix login" |
+| `# TODO[docs]: write README` | Tag `DOCS`, text "write README" |
+| `// todo[Ui] center button` | Tag `UI`, text "center button" (case and `:` don't matter) |
+| `// TODO fix login` | Grouped under `UNTAGGED` |
+| `// TODO[api]` | Tag `API`, text "WITHOUT DESCRIPTION" |
+
+Tags are always shown in uppercase, so `backend`, `Backend` and `BACKEND` end up in the same group.
 
 ## Roadmap
 
@@ -70,7 +72,7 @@ Click any item to jump straight to its line.
 Requirements: [Node.js](https://nodejs.org) (LTS) and [VS Code](https://code.visualstudio.com).
 
 ```bash
-git clone https://github.com/<your-user>/tagged-todos.git
+git clone https://github.com/pablojimp/tagged-todos.git
 cd tagged-todos
 npm install
 ```
