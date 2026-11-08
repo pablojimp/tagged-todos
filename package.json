@@ -3,6 +3,7 @@
   "displayName": "Tagged TODOs",
   "description": "Groups TODO[tag] comments by tag in a sidebar tree, so you can jump to each one.",
   "version": "0.0.1",
+  "license": "MIT",
   "engines": {
     "vscode": "^1.144.0"
   },
