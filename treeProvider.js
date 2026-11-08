@@ -1,4 +1,5 @@
 const vscode = require('vscode');
+const path = require('path');
 
 class MapTree {
   /**
@@ -25,8 +26,13 @@ class MapTree {
     let treeItem
     if (typeof element === "string") {
       treeItem = new vscode.TreeItem(element, vscode.TreeItemCollapsibleState.Collapsed)
+      const count = (this.todosByTag.get(element) ?? []).length
+      treeItem.description = `(${count})`
     } else {
       treeItem = new vscode.TreeItem(element.TODO.text, vscode.TreeItemCollapsibleState.None)
+      const lineNumber = element.LINE + 1
+      treeItem.description = `${path.basename(element.FILE.fsPath)}:${lineNumber}`
+      treeItem.tooltip = `${vscode.workspace.asRelativePath(element.FILE)}:${lineNumber}`
       treeItem.command = {
         title: "Open TODO",
         command: "vscode.open",
