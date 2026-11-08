@@ -2,13 +2,29 @@
   "name": "tagged-todos",
   "displayName": "Tagged TODOs",
   "description": "Groups TODO[tag] comments by tag in a sidebar tree, so you can jump to each one.",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "publisher": "pablojimp",
   "license": "MIT",
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pablojimp/tagged-todos.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pablojimp/tagged-todos/issues"
+  },
   "engines": {
-    "vscode": "^1.144.0"
+    "vscode": "^1.74.0"
   },
   "categories": [
     "Other"
+  ],
+  "keywords": [
+    "todo",
+    "tags",
+    "comments",
+    "tree view",
+    "productivity"
   ],
   "activationEvents": [],
   "main": "./extension.js",
@@ -24,7 +40,7 @@
       ]
     },
     "views": {
-      "todo-tags":[
+      "todo-tags": [
         {
           "id": "todo-tags.list",
           "name": "TODOs by Tag",
@@ -41,7 +57,7 @@
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "@types/node": "24.x",
-    "@types/vscode": "^1.144.0",
+    "@types/vscode": "~1.74.0",
     "@vscode/test-cli": "^0.0.15",
     "@vscode/test-electron": "^3.0.0",
     "eslint": "^10.5.0",
