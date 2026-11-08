@@ -2,7 +2,8 @@
 
 > Write `TODO[tag]: text` in your code and see every TODO grouped by tag in its own sidebar view.
 
-![Status](https://img.shields.io/badge/status-work%20in%20progress-orange)
+[![Marketplace](https://img.shields.io/visual-studio-marketplace/v/pablojimp.tagged-todos?label=Marketplace)](https://marketplace.visualstudio.com/items?itemName=pablojimp.tagged-todos)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/pablojimp.tagged-todos)](https://marketplace.visualstudio.com/items?itemName=pablojimp.tagged-todos)
 ![VS Code](https://img.shields.io/badge/VS%20Code-extension-007ACC)
 ![Language](https://img.shields.io/badge/built%20with-JavaScript-F7DF1E)
 
@@ -65,7 +66,7 @@ Tags are always shown in uppercase, so `backend`, `Backend` and `BACKEND` end up
 - [x] Click to jump to the line + auto refresh
 - [ ] Settings: file types and folders to ignore
 - [ ] Highlight tagged TODOs in the editor
-- [ ] Publish on the Marketplace
+- [x] Publish on the Marketplace
 
 ## Development
 
