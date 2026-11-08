@@ -1,0 +1,22 @@
+name: Publish to Marketplace
+
+# Run it by hand from the Actions tab on GitHub
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # lets the job ask GitHub for an OIDC token (no PAT needed)
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm ci
+
+      - run: npx --yes @vscode/vsce@4.1.0 publish --oidc
