@@ -2,7 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 const { textAnalyzer } = require('./parser')
-const {MapTree} = require('./treeProvider')
+const { MapTree } = require('./treeProvider')
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 
@@ -14,20 +14,17 @@ async function activate(context) {
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "tagged-todos" is now active!');
-	const currentTodos = await loadTodos()
-	const vistaArbol = mapaArbol(currentTodos)
-	const arbol = new MapTree(vistaArbol)
-	const arbolDisposable = vscode.window.registerTreeDataProvider("todo-tags.list", arbol)
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('tagged-todos.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Tagged TODOs!');
-	});
+	let currentTodos = await loadTodos()
+	let vistaArbol = mapaArbol(currentTodos)
+	let arbol = new MapTree(vistaArbol)
+	let arbolDisposable = vscode.window.registerTreeDataProvider("todo-tags.list", arbol)
 
-	context.subscriptions.push(disposable,arbolDisposable);
+	const escucha = vscode.workspace.onDidSaveTextDocument(async (documento) => {
+		currentTodos = await loadTodos()
+		vistaArbol = mapaArbol(currentTodos)
+		arbol.refrescar(vistaArbol)
+	})
+	context.subscriptions.push(arbolDisposable, escucha);
 }
 async function loadTodos() {
 	const files = await loadWorkspace()
@@ -64,14 +61,14 @@ function mapaArbol(lista) {
 
 	const mapaDevolver = new Map();
 	for (let i = 0; i < lista.length; i++) {
-		if(mapaDevolver.get(lista[i].TODO.tag)){
-			
-			mapaDevolver.get(lista[i].TODO.tag).push(lista[i])	
+		if (mapaDevolver.get(lista[i].TODO.tag)) {
+
+			mapaDevolver.get(lista[i].TODO.tag).push(lista[i])
 		}
-		else{
+		else {
 			let arrayGuardar = []
 			arrayGuardar.push(lista[i])
-			mapaDevolver.set(lista[i].TODO.tag , arrayGuardar)
+			mapaDevolver.set(lista[i].TODO.tag, arrayGuardar)
 		}
 	}
 	return mapaDevolver
@@ -81,7 +78,7 @@ async function loadWorkspace() {
 	return await vscode.workspace.findFiles('**/*', '**/{node_modules,.git,target,out}/**');
 }
 // This method is called when your extension is deactivated
-function deactivate() {}
+function deactivate() { }
 
 module.exports = {
 	activate,

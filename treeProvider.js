@@ -10,8 +10,12 @@ class MapTree {
    */
 
   constructor(mapa) {
-    this.mapa = mapa;
+    this.mapa = mapa
+    /** @type {vscode.EventEmitter<void>} */
+    this.emisor = new vscode.EventEmitter()
+    this.onDidChangeTreeData = this.emisor.event
   }
+
 
   /**
    * @param {*} element 
@@ -26,13 +30,24 @@ class MapTree {
       treeItem.command = {
         title: "Open TODO",
         command: "vscode.open",
-        arguments: [ element.FILE, { selection: new vscode.Range(element.LINE,0,element.LINE,0) }]
+        arguments: [element.FILE, { selection: new vscode.Range(element.LINE, 0, element.LINE, 0) }]
       }
     }
 
     return treeItem
   }
-
+  /**
+   * @param {Map<string, {
+   *   TODO: { tag: string, text: string },
+   *   FILE: vscode.Uri,
+   *   LINE: number
+   * }[]>} mapaNuevo
+   * 
+   */
+  refrescar(mapaNuevo) {
+    this.mapa = mapaNuevo
+    this.emisor.fire()
+  }
   /**
    * @param {*} element 
    */
